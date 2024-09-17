@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import { useWorkoutsContext } from '../hooks/useWorkoutsContext'
 
 //components
 import WorkoutDetails from '../components/WorkoutDetails'
@@ -6,8 +7,8 @@ import WorkoutForm from '../components/WorkoutForm'
 
 
 const Home = () =>{
-
-    const[workouts, setWorkouts] = useState(null)     
+    const {workouts, dispatch } = useWorkoutsContext()
+    
     
     useEffect(() => {  //this fires a function when the component is rendered. [] (dependency array)-> fires once 
         const fetchWorkouts = async () => {
@@ -15,7 +16,8 @@ const Home = () =>{
             const json = await response.json()
 
             if(response.ok){
-                setWorkouts(json)  // setting state to response if the response is okay
+                //setWorkouts(json)  // setting state to response if the response is okay
+                dispatch({type: 'SET_WORKOUTS', payload: json})
             }
         }
         fetchWorkouts()
