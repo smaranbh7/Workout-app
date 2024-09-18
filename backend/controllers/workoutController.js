@@ -31,6 +31,21 @@ const getWorkout = async(req,res) => {
 const createWorkout = async (req,res) =>{
     const {title, load, reps} = req.body  //destructures title, load, and reps from req.body, which means it's expecting the client to send these values in the request body (typically in JSON format) when creating a workout.
 
+    let emptyFields = []
+
+        if (!title) {
+            emptyFields.push('title')
+        }
+        if (!load) {
+            emptyFields.push('load')
+        }
+        if (!reps) {
+            emptyFields.push('reps')
+        }
+        if (emptyFields.length > 0) {
+            return res.status(400).json({ error: 'Please fill in all fields', emptyFields })
+        }
+
 // add doc to db
     try {
         const workout = await Workout.create({title, load, reps})  // this is async.  uses the Workout.create() method  to create and save a new workout document in the MongoDB database with the provided title, load, and reps fields.
