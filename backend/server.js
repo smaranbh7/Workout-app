@@ -17,7 +17,7 @@ app.use((req, res, next) => {
 })
 
 //routes
-// This grabs and attaches all the routes from workouts.js and uses in the app. And when wwe go to this: '/api/workouts' then workoutRoutes's routes gets fired and to end of it
+// This grabs and attaches all the routes from workouts.js/users,js and uses in the app. And when we go to this: '/api/workouts' then workoutRoutes's routes gets fired and to end of it
 app.use('/api/workouts', workoutRoutes) 
 app.use('/api/user', userRoutes) 
 
