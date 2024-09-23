@@ -45,7 +45,7 @@ userSchema.statics.signup = async function(email, password) {
   return user
 }
 
-
+//static login method
 userSchema.statics.login = async function(email, password) {
 
     if (!email || !password) {
@@ -56,7 +56,8 @@ userSchema.statics.login = async function(email, password) {
     if (!user) {
       throw Error('Incorrect email')
     }
-  
+    
+    //return boolean either true or false
     const match = await bcrypt.compare(password, user.password)
     if (!match) {
       throw Error('Incorrect password')
