@@ -20,23 +20,24 @@ const userSchema = new Schema({
 userSchema.statics.signup = async function(email, password) {
 
     //validation
-    if(!email || !password) {
-        throw Error('All fields must be filled')
-    }
-    // Validator returns  boolean vlaue either true or false 
-    if (!validator.isEmail(email)){
-        throw Error('Email is not valid')
-    }
-    if(!validator.isStrongPassword(password)){
-        throw Error('Password not strong enough')
-    }
+    // validation
+  if (!email || !password) {
+    throw Error('All fields must be filled')
+  }
+  if (!validator.isEmail(email)) {
+    throw Error('Email not valid')
+  }
+  if (!validator.isStrongPassword(password)) {
+    throw Error('Password not strong enough')
+  }
 
   const exists = await this.findOne({ email })
 
   if (exists) {
     throw Error('Email already in use')
   }
-   //Password hashing
+
+  //password hashing
   const salt = await bcrypt.genSalt(10)
   const hash = await bcrypt.hash(password, salt)
 
