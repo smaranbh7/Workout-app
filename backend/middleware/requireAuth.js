@@ -9,7 +9,7 @@ const requireAuth = async (req, res, next) => {
     return res.status(401).json({error: 'Authorization token required'})
   }
 
-  const token = authorization.split(' ')[1]
+  const token = authorization.split(' ')[1]  ////'Bearer fdgrtsgdtgs.rfhygrg454dgbd.tegtderg544' . This is used to split the token
 
   try {
     const { _id } = jwt.verify(token, process.env.SECRET)
